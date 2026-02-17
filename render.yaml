@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: go-sargodha-api
+    env: python
+    region: singapore
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MONGODB_URL
+        sync: false
+      - key: DATABASE_NAME
+        value: service_request_app
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 10080
+      - key: ZONG_API_URL
+        value: https://cbs.zong.com.pk/reachrestapi/home/SendQuickSMS
+      - key: ZONG_LOGIN_ID
+        sync: false
+      - key: ZONG_PASSWORD
+        sync: false
+      - key: ZONG_MASK
+        value: BGS
+      - key: ADMIN_DEFAULT_EMAIL
+        value: admin@serviceapp.com
+      - key: ADMIN_DEFAULT_PASSWORD
+        sync: false
+      - key: OTP_EXPIRY_MINUTES
+        value: 5
+      - key: PYTHON_VERSION
+        value: 3.11.0
