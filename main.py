@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from database import connect_to_mongo, close_mongo_connection
-from routes import user, admin
+from routers import user, admin
 
 
 @asynccontextmanager
@@ -67,3 +67,4 @@ if __name__ == "__main__":
     # Falls back to 8000 for local development
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
+
